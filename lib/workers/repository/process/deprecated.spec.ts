@@ -5,14 +5,14 @@ describe('workers/repository/process/deprecated', () => {
   describe('raiseDeprecationWarnings()', () => {
     it('returns if onboarding', async () => {
       const config = {};
-      await raiseDeprecationWarnings(config, {});
+      expect(await raiseDeprecationWarnings(config, {})).toHaveReturned();
     });
     it('returns if disabled', async () => {
       const config = {
         repoIsOnboarded: true,
         suppressNotifications: ['deprecationWarningIssues'],
       };
-      await raiseDeprecationWarnings(config, {});
+      expect(await raiseDeprecationWarnings(config, {})).toHaveReturned();
     });
     it('raises deprecation warnings', async () => {
       const config = {

@@ -16,7 +16,7 @@ describe('manager/gomod/update', () => {
       };
       const res = updateDependency({ fileContent: gomod1, upgrade });
       expect(res).not.toEqual(gomod1);
-      expect(res.includes(upgrade.newValue)).toBe(true);
+      expect(res.includes(upgrade.newValue)).toContain(true);
     });
     it('replaces two values in one file', () => {
       const upgrade1 = {
@@ -30,7 +30,7 @@ describe('manager/gomod/update', () => {
         upgrade: upgrade1,
       });
       expect(res1).not.toEqual(gomod1);
-      expect(res1.includes(upgrade1.newValue)).toBe(true);
+      expect(res1.includes(upgrade1.newValue)).toContain(true);
       const upgrade2 = {
         depName: 'github.com/aws/aws-sdk-go',
         managerData: { lineNumber: 3 },
@@ -65,8 +65,8 @@ describe('manager/gomod/update', () => {
       };
       const res = updateDependency({ fileContent: gomod1, upgrade });
       expect(res).not.toEqual(gomod2);
-      expect(res.includes(upgrade.newValue)).toBe(true);
-      expect(res.includes('github.com/pkg/errors/v2')).toBe(true);
+      expect(res.includes(upgrade.newValue)).toContain(true);
+      expect(res.includes('github.com/pkg/errors/v2')).toContain(true);
     });
     it('replaces major gopkg.in updates', () => {
       const upgrade = {
@@ -81,7 +81,7 @@ describe('manager/gomod/update', () => {
       const res = updateDependency({ fileContent: gomod1, upgrade });
       expect(res).toMatchSnapshot();
       expect(res).not.toEqual(gomod2);
-      expect(res.includes('gopkg.in/russross/blackfriday.v2 v2.0.0')).toBe(
+      expect(res.includes('gopkg.in/russross/blackfriday.v2 v2.0.0')).toContain(
         true
       );
     });
@@ -107,7 +107,7 @@ describe('manager/gomod/update', () => {
       };
       const res = updateDependency({ fileContent: gomod2, upgrade });
       expect(res).not.toEqual(gomod2);
-      expect(res.includes(upgrade.newValue)).toBe(true);
+      expect(res.includes(upgrade.newValue)).toContain(true);
     });
     it('replaces quoted multiline', () => {
       const upgrade = {
@@ -119,7 +119,7 @@ describe('manager/gomod/update', () => {
       const res = updateDependency({ fileContent: gomod2, upgrade });
       expect(res).toMatchSnapshot();
       expect(res).not.toEqual(gomod2);
-      expect(res.includes(upgrade.newValue)).toBe(true);
+      expect(res.includes(upgrade.newValue)).toContain(true);
     });
     it('replaces major multiline', () => {
       const upgrade = {
@@ -133,8 +133,8 @@ describe('manager/gomod/update', () => {
       };
       const res = updateDependency({ fileContent: gomod2, upgrade });
       expect(res).not.toEqual(gomod2);
-      expect(res.includes(upgrade.newValue)).toBe(true);
-      expect(res.includes('github.com/emirpasic/gods/v2')).toBe(true);
+      expect(res.includes(upgrade.newValue)).toContain(true);
+      expect(res.includes('github.com/emirpasic/gods/v2')).toContain(true);
     });
     it('bumps major multiline', () => {
       const upgrade = {
@@ -148,8 +148,8 @@ describe('manager/gomod/update', () => {
       };
       const res = updateDependency({ fileContent: gomod2, upgrade });
       expect(res).not.toEqual(gomod2);
-      expect(res.includes(upgrade.newValue)).toBe(true);
-      expect(res.includes('github.com/src-d/gcfg/v3')).toBe(true);
+      expect(res.includes(upgrade.newValue)).toContain(true);
+      expect(res.includes('github.com/src-d/gcfg/v3')).toContain(true);
     });
     it('update multiline digest', () => {
       const upgrade = {
@@ -163,8 +163,8 @@ describe('manager/gomod/update', () => {
       };
       const res = updateDependency({ fileContent: gomod2, upgrade });
       expect(res).not.toEqual(gomod2);
-      expect(res.includes(upgrade.newDigest)).toBe(false);
-      expect(res.includes(upgrade.newDigest.substring(0, 12))).toBe(true);
+      expect(res.includes(upgrade.newDigest)).toContain(false);
+      expect(res.includes(upgrade.newDigest.substring(0, 12))).toContain(true);
     });
     it('skips already-updated multiline digest', () => {
       const upgrade = {
@@ -199,7 +199,7 @@ describe('manager/gomod/update', () => {
       const res = updateDependency({ fileContent: gomod1, upgrade });
       expect(res).not.toEqual(gomod1);
       // Assert that the version still contains +incompatible tag.
-      expect(res.includes(upgrade.newValue + '+incompatible')).toBe(true);
+      expect(res.includes(upgrade.newValue + '+incompatible')).toContain(true);
     });
     it('handles replace line with minor version update', () => {
       const upgrade = {
@@ -210,7 +210,7 @@ describe('manager/gomod/update', () => {
       };
       const res = updateDependency({ fileContent: gomod1, upgrade });
       expect(res).not.toEqual(gomod1);
-      expect(res.includes(upgrade.newValue)).toBe(true);
+      expect(res.includes(upgrade.newValue)).toContain(true);
     });
     it('handles replace line with major version update', () => {
       const upgrade = {
@@ -224,7 +224,7 @@ describe('manager/gomod/update', () => {
       };
       const res = updateDependency({ fileContent: gomod1, upgrade });
       expect(res).not.toEqual(gomod1);
-      expect(res.includes(upgrade.newValue)).toBe(true);
+      expect(res.includes(upgrade.newValue)).toContain(true);
     });
     it('handles replace line with digest', () => {
       const upgrade = {
@@ -240,7 +240,7 @@ describe('manager/gomod/update', () => {
       };
       const res = updateDependency({ fileContent: gomod1, upgrade });
       expect(res).not.toEqual(gomod1);
-      expect(res.includes(upgrade.newDigest.substring(0, 12))).toBe(true);
+      expect(res.includes(upgrade.newDigest.substring(0, 12))).toContain(true);
     });
     it('handles no pinned version to latest available version', () => {
       const upgrade = {
@@ -254,7 +254,7 @@ describe('manager/gomod/update', () => {
       };
       const res = updateDependency({ fileContent: gomod1, upgrade });
       expect(res).not.toEqual(gomod1);
-      expect(res.includes(upgrade.newValue)).toBe(true);
+      expect(res.includes(upgrade.newValue)).toContain(true);
       expect(res).toContain(upgrade.depName + '/v6');
     });
   });

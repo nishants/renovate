@@ -282,7 +282,7 @@ describe('bundler.updateArtifacts()', () => {
           isLockFileMaintenance: true,
         },
       })
-    ).rejects.toThrowError(BUNDLER_UNKNOWN_ERROR);
+    ).rejects.toThrow(BUNDLER_UNKNOWN_ERROR);
     expect(execSnapshots).toMatchSnapshot();
   });
   it('performs lockFileMaintenance', async () => {

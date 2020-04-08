@@ -72,10 +72,10 @@ describe('platform/git/storage', () => {
 
   describe('setBaseBranch(branchName)', () => {
     it('sets the base branch as master', async () => {
-      await git.setBaseBranch('master');
+      await expect(git.setBaseBranch('master')).resolves.not.toThrow();
     });
     it('sets non-master base branch', async () => {
-      await git.setBaseBranch('develop');
+      await expect(git.setBaseBranch('develop')).resolves.not.toThrow();
     });
     it('should throw if branch does not exist', async () => {
       await expect(git.setBaseBranch('not_found')).rejects.toMatchSnapshot();
@@ -219,22 +219,24 @@ describe('platform/git/storage', () => {
         name: 'some-new-file',
         contents: 'some new-contents',
       };
-      await git.commitFilesToBranch({
+      const commit = await git.commitFilesToBranch({
         branchName: 'renovate/past_branch',
         files: [file],
         message: 'Create something',
       });
+      expect(commit).not.toBeNull();
     });
     it('deletes file', async () => {
       const file = {
         name: '|delete|',
         contents: 'file_to_delete',
       };
-      await git.commitFilesToBranch({
+      const commit = await git.commitFilesToBranch({
         branchName: 'renovate/something',
         files: [file],
         message: 'Delete something',
       });
+      expect(commit).not.toBeNull();
     });
     it('updates multiple files', async () => {
       const files = [
@@ -247,11 +249,12 @@ describe('platform/git/storage', () => {
           contents: 'other updated content',
         },
       ];
-      await git.commitFilesToBranch({
+      const commit = await git.commitFilesToBranch({
         branchName: 'renovate/something',
         files,
         message: 'Update something',
       });
+      expect(commit).not.toBeNull();
     });
     it('updates git submodules', async () => {
       const files = [
@@ -260,11 +263,12 @@ describe('platform/git/storage', () => {
           contents: 'some content',
         },
       ];
-      await git.commitFilesToBranch({
+      const commit = await git.commitFilesToBranch({
         branchName: 'renovate/something',
         files,
         message: 'Update something',
       });
+      expect(commit).not.toBeNull();
     });
     it('does not push when no diff', async () => {
       const branchName = 'renovate/something';
@@ -275,11 +279,12 @@ describe('platform/git/storage', () => {
         `refs/heads/${branchName}:refs/remotes/origin/${branchName}`,
       ]);
       const files = [];
-      await git.commitFilesToBranch({
+      const commit = await git.commitFilesToBranch({
         branchName,
         files,
         message: 'Update something',
       });
+      expect(commit).toBeNull();
     });
   });
 

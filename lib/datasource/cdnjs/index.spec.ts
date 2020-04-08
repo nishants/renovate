@@ -26,13 +26,13 @@ describe('datasource/cdnjs', () => {
     });
     it('throws for empty result', async () => {
       got.mockResolvedValueOnce(null);
-      await expect(getReleases({ lookupName: 'foo/bar' })).rejects.toThrowError(
+      await expect(getReleases({ lookupName: 'foo/bar' })).rejects.toThrow(
         DATASOURCE_FAILURE
       );
     });
     it('throws for missing fields', async () => {
       got.mockResolvedValueOnce({});
-      await expect(getReleases({ lookupName: 'foo/bar' })).rejects.toThrowError(
+      await expect(getReleases({ lookupName: 'foo/bar' })).rejects.toThrow(
         DATASOURCE_FAILURE
       );
     });
@@ -42,19 +42,19 @@ describe('datasource/cdnjs', () => {
     });
     it('throws for 401', async () => {
       got.mockRejectedValueOnce({ statusCode: 401 });
-      await expect(getReleases({ lookupName: 'foo/bar' })).rejects.toThrowError(
+      await expect(getReleases({ lookupName: 'foo/bar' })).rejects.toThrow(
         DATASOURCE_FAILURE
       );
     });
     it('throws for 429', async () => {
       got.mockRejectedValueOnce({ statusCode: 429 });
-      await expect(getReleases({ lookupName: 'foo/bar' })).rejects.toThrowError(
+      await expect(getReleases({ lookupName: 'foo/bar' })).rejects.toThrow(
         DATASOURCE_FAILURE
       );
     });
     it('throws for 5xx', async () => {
       got.mockRejectedValueOnce({ statusCode: 502 });
-      await expect(getReleases({ lookupName: 'foo/bar' })).rejects.toThrowError(
+      await expect(getReleases({ lookupName: 'foo/bar' })).rejects.toThrow(
         DATASOURCE_FAILURE
       );
     });
@@ -62,7 +62,7 @@ describe('datasource/cdnjs', () => {
       got.mockImplementationOnce(() => {
         throw new Error();
       });
-      await expect(getReleases({ lookupName: 'foo/bar' })).rejects.toThrowError(
+      await expect(getReleases({ lookupName: 'foo/bar' })).rejects.toThrow(
         DATASOURCE_FAILURE
       );
     });

@@ -99,7 +99,7 @@ describe(getName(__filename), () => {
 
     global.repoCache = {};
 
-    await expect(got({ hostType: PLATFORM_TYPE_GITHUB })).rejects.toThrowError(
+    await expect(got({ hostType: PLATFORM_TYPE_GITHUB })).rejects.toThrow(
       'not-found'
     );
 

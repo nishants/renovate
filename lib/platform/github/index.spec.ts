@@ -744,7 +744,7 @@ describe('platform/github', () => {
       const res = await github.getBranchStatus('somebranch', []);
       expect(res).toEqual(BranchStatus.green);
     });
-    it('should fail if a check run has failed', async () => {
+    it('should fail if a check run is pending', async () => {
       await initRepo({
         repository: 'some/repo',
       });
@@ -1295,7 +1295,7 @@ describe('platform/github', () => {
         once: false,
         shouldReOpen: false,
       });
-      expect(res).toEqual(null);
+      expect(res).toBeNull();
     });
   });
   describe('ensureIssueClosing()', () => {
@@ -1327,7 +1327,7 @@ describe('platform/github', () => {
           },
         },
       });
-      await github.ensureIssueClosing('title-2');
+      await expect(github.ensureIssueClosing('title-2')).resolves.not.toThrow();
     });
   });
   describe('deleteLabel(issueNo, label)', () => {

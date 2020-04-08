@@ -1,3 +1,4 @@
+/* eslint jest/no-standalone-expect: 0 */
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import Git from 'simple-git/promise';

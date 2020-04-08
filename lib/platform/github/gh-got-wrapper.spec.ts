@@ -51,7 +51,7 @@ describe('platform/gh-got-wrapper', () => {
     await api.post('graphql', {
       body: 'abc',
     });
-    expect(got.mock.calls[0][0].includes('/v3')).toBe(false);
+    expect(got.mock.calls[0][0].includes('/v3')).toContain(false);
   });
   it('paginates', async () => {
     got.mockReturnValueOnce({
@@ -163,7 +163,7 @@ describe('platform/gh-got-wrapper', () => {
     expect(e).toBeDefined();
     expect(e.message).toEqual(PLATFORM_FAILURE);
   });
-  it('should throw for unauthorized integration', async () => {
+  it('should throw for unauthorized integration with message', async () => {
     got.mockImplementationOnce(() =>
       Promise.reject({
         statusCode: 403,
@@ -174,7 +174,7 @@ describe('platform/gh-got-wrapper', () => {
     expect(e).toBeDefined();
     expect(e.message).toEqual(PLATFORM_INTEGRATION_UNAUTHORIZED);
   });
-  it('should throw for unauthorized integration', async () => {
+  it('should throw for unauthorized integration and nested message', async () => {
     const gotErr = {
       statusCode: 403,
       body: { message: 'Upgrade to GitHub Pro' },

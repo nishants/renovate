@@ -68,7 +68,7 @@ export async function processRepo(
   return extract(config);
 }
 
-export async function updateRepo(
+export function updateRepo(
   config: RenovateConfig,
   branches: BranchConfig[],
   branchList: string[],

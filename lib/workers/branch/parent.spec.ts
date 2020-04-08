@@ -127,7 +127,7 @@ describe('workers/branch/parent', () => {
         isModified: true,
       });
       const res = await getParentBranch(config);
-      expect(res.parentBranch).not.toBeUndefined();
+      expect(res.parentBranch).not.toBeNil();
     });
   });
 });

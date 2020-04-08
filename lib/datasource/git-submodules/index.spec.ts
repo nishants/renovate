@@ -17,7 +17,7 @@ describe('datasource/git-submoduless', () => {
         },
       });
       const versions = await getReleases({ lookupName, registryUrls });
-      expect(versions).toEqual(null);
+      expect(versions).toBeNull();
     });
     it('returns null if remote call throws exception', async () => {
       simpleGit.mockReturnValue({
@@ -26,7 +26,7 @@ describe('datasource/git-submoduless', () => {
         },
       });
       const versions = await getReleases({ lookupName, registryUrls });
-      expect(versions).toEqual(null);
+      expect(versions).toBeNull();
     });
     it('returns versions filtered from tags', async () => {
       simpleGit.mockReturnValue({

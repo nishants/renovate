@@ -1,3 +1,5 @@
+// TODO fix mocks
+/* eslint-disable jest/expect-expect */
 import URL from 'url';
 import responses from './__fixtures__/responses';
 import { GotApi, RepoParams, Platform } from '../common';
@@ -156,7 +158,8 @@ describe('platform/bitbucket', () => {
     it('sends to gitFs', async () => {
       await initRepo();
       await mocked(async () => {
-        await bitbucket.getFileList();
+        const fileList = await bitbucket.getFileList();
+        expect(fileList).not.toBeNull();
       });
     });
   });
@@ -166,7 +169,8 @@ describe('platform/bitbucket', () => {
       it('sends to gitFs', async () => {
         await initRepo();
         await mocked(async () => {
-          await bitbucket.branchExists('test');
+          const branchExists = await bitbucket.branchExists('test');
+          expect(branchExists).toEqual(true);
         });
       });
     });

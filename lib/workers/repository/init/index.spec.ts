@@ -18,7 +18,8 @@ describe('workers/repository/init', () => {
     it('runs', async () => {
       base.checkBaseBranch.mockResolvedValue({});
       apis.initApis.mockResolvedValue({} as never);
-      await initRepo({});
+      const renovateConfig = await initRepo({});
+      expect(renovateConfig).toMatchSnapshot();
     });
   });
 });

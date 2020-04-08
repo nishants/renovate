@@ -103,7 +103,7 @@ describe('workers/branch/package-json', () => {
         upgrade,
       });
       expect(res).toMatchSnapshot();
-      expect(res.includes('v1.1.0')).toBe(true);
+      expect(res.includes('v1.1.0')).toContain(true);
     });
     it('updates resolutions too', () => {
       const upgrade = {

@@ -42,7 +42,8 @@ describe('workers/repository/init/config', () => {
         },
       });
       platform.getFile.mockResolvedValue(pJson);
-      await mergeRenovateConfig(config);
+      const renovateConfig = await mergeRenovateConfig(config);
+      expect(renovateConfig).toBeTruthy();
     });
     it('returns error if cannot parse', async () => {
       platform.getFileList.mockResolvedValue(['package.json', 'renovate.json']);
@@ -82,7 +83,8 @@ describe('workers/repository/init/config', () => {
       platform.getFile.mockResolvedValue(`{
         // this is json5 format
       }`);
-      await mergeRenovateConfig(config);
+      const renovateConfig = await mergeRenovateConfig(config);
+      expect(renovateConfig).toBeTruthy();
     });
     it('finds .github/renovate.json', async () => {
       platform.getFileList.mockResolvedValue([
@@ -90,7 +92,8 @@ describe('workers/repository/init/config', () => {
         '.github/renovate.json',
       ]);
       platform.getFile.mockResolvedValue('{}');
-      await mergeRenovateConfig(config);
+      const renovateConfig = await mergeRenovateConfig(config);
+      expect(renovateConfig).toBeTruthy();
     });
     it('finds .gitlab/renovate.json', async () => {
       platform.getFileList.mockResolvedValue([
@@ -98,7 +101,8 @@ describe('workers/repository/init/config', () => {
         '.gitlab/renovate.json',
       ]);
       platform.getFile.mockResolvedValue('{}');
-      await mergeRenovateConfig(config);
+      const renovateConfig = await mergeRenovateConfig(config);
+      expect(renovateConfig).toBeTruthy();
     });
     it('finds .renovaterc.json', async () => {
       platform.getFileList.mockResolvedValue([
@@ -106,7 +110,8 @@ describe('workers/repository/init/config', () => {
         '.renovaterc.json',
       ]);
       platform.getFile.mockResolvedValue('{}');
-      await mergeRenovateConfig(config);
+      const renovateConfig = await mergeRenovateConfig(config);
+      expect(renovateConfig).toBeTruthy();
     });
     it('throws error if misconfigured', async () => {
       platform.getFileList.mockResolvedValue([

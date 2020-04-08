@@ -1,3 +1,5 @@
+// TODO fix mocks
+/* eslint-disable jest/expect-expect */
 import responses from './__fixtures__/responses';
 import { GotApi, RepoParams, Platform } from '../common';
 import { Storage } from '../git/storage';

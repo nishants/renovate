@@ -1,3 +1,5 @@
+// TODO fix mocks
+/* eslint-disable jest/expect-expect */
 import * as _hostRules from '../../util/host-rules';
 import {
   REPOSITORY_ARCHIVED,
@@ -1101,14 +1103,14 @@ describe('platform/gitlab', () => {
     jest.resetAllMocks();
     it('updates the PR', async () => {
       await gitlab.updatePr(1, 'title', 'body');
-      expect(api.put.mock.calls.length).toEqual(1);
+      expect(api.put.mock.calls).toHaveLength(1);
     });
   });
   describe('mergePr(pr)', () => {
     jest.resetAllMocks();
     it('merges the PR', async () => {
       await gitlab.mergePr(1, undefined);
-      expect(api.put.mock.calls.length).toEqual(1);
+      expect(api.put.mock.calls).toHaveLength(1);
     });
   });
   const prBody = `https://github.com/foo/bar/issues/5 plus also [a link](https://github.com/foo/bar/issues/5

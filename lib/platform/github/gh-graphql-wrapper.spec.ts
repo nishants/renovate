@@ -153,6 +153,6 @@ describe('platform/gh-graphql-wrapper', () => {
 
     const items = await getGraphqlNodes(query, 'testItem');
     expect(got).toHaveBeenCalledTimes(3);
-    expect(items.length).toEqual(3);
+    expect(items).toHaveLength(3);
   });
 });
